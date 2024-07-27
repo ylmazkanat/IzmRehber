@@ -10,14 +10,40 @@
     <!-- Responsive datatable examples -->
     <link href="~/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 }
-<div class="row align-items-center">
-    <div class="col-md-6">
-    </div>
-
-    <div class="col-md-6">
-        <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
-            <div>
-                <a href="#" class="btn btn-light"><i class="bx bx-plus me-1"></i> Yeni Kişi Ekle</a>
+<div class="card">
+    <div class="card-body">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <form id="addEmployeeForm" class="row gx-3 gy-2 align-items-center mb-4 mb-lg-0">
+                    <div class="col-sm-2">
+                        <label class="visually-hidden" for="kullaniciAdi">Kullanıcı Adı</label>
+                        <input type="text" class="form-control" id="kullaniciAdi" placeholder="Kullanıcı Adı">
+                    </div>
+                    <div class="col-sm-2">
+                        <label class="visually-hidden" for="sifre">Şifre</label>
+                        <input type="text" class="form-control" id="sifre" placeholder="Şifre">
+                    </div>
+                    <div class="col-sm-2">
+                        <label class="visually-hidden" for="adSoyad">Adı Soyadı</label>
+                        <input type="text" class="form-control" id="adSoyad" placeholder="Adı Soyadı">
+                    </div>
+                    <div class="col-sm-2">
+                        <label class="visually-hidden" for="departman">Departman</label>
+                        <input type="text" class="form-control" id="departman" placeholder="Departman">
+                    </div>
+                    <div class="col-sm-2">
+                        <label class="visually-hidden" for="email">E-Posta</label>
+                        <input type="text" class="form-control" id="email" placeholder="E-Posta">
+                    </div>
+                    <div class="col-sm-2">
+                        <label class="visually-hidden" for="tel">Telefon</label>
+                        <input type="text" class="form-control" id="tel" placeholder="Telefon">
+                    </div>
+                    <br />
+                    <div class="col-sm-12">
+                        <center> <button type="submit" class="btn btn-light">Yeni Kişi Ekle</button></center>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -91,6 +117,43 @@
                 pageLength: 10,
                 responsive: true
             });
+
+            $('#addEmployeeForm').on('submit', function (e) {
+                e.preventDefault();
+
+                var kullaniciAdi = $('#kullaniciAdi').val();
+                var sifre = $('#sifre').val();
+                var adSoyad = $('#adSoyad').val();
+                var departman = $('#departman').val();
+                var email = $('#email').val();
+                var tel = $('#tel').val();
+
+                $.ajax({
+                    url: '@Url.Action("CreateEmployee", "Admin")',
+                    type: 'POST',
+                    data: {
+                        kullaniciAdi: kullaniciAdi,
+                        sifre: sifre,
+                        adSoyad: adSoyad,
+                        departman: departman,
+                        email: email,
+                        tel: tel
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            alert(response.message);
+                            window.location.reload();
+                            
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function () {
+                        alert('Çalışan eklenirken bir hata oluştu.');
+                    }
+                });
+            });
+
 
             $('.edit').on('click', function () {
                 var row = $(this).closest('tr');
