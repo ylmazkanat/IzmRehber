@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewBag.Title = "Rehber";
+    ViewBag.pTitle = "Rehber";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section styles{
+
+    <!-- DataTables -->
+    <link href="~/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Responsive datatable examples -->
+    <link href="~/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+}
+
+
+<div class="row align-items-center">
+    <div class="col-md-6">
+        
+    </div>
+
+    <div class="col-md-6">
+        <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
+            
+            <div>
+                <a href="#" class="btn btn-light"><i class="bx bx-plus me-1"></i> Yeni Kişi Ekle</a>
+            </div>
+
+           
+        </div>
+
+    </div>
+</div>
+<!-- end row -->
+
+<div class="table-responsive mb-4">
+    <table class="table align-middle datatable dt-responsive table-check nowrap" style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
+        <thead>
+            <tr>
+                <th scope="col">Adı Soyadı</th>
+                <th scope="col">Departman</th>
+                <th scope="col">E-Posta</th>
+                <th scope="col">Telefon</th>
+                <th scope="col">İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="#" class="text-body">@employee.AdSoyad</a>
+                    </td>
+                    <td>@employee.Departman</td>
+                    <td>@employee.Email</td>
+                    <td>@employee.Tel</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bx bx-dots-horizontal-rounded"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <!-- end table -->
+</div>
+<!-- end table responsive -->
+
+
+@section scripts{
+
+    <!-- Required datatable js -->
+    <script src="~/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Responsive examples -->
+    <script src="~/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+
+    <!-- init js -->
+    <script src="~/assets/js/pages/datatable-pages.init.js"></script>
+
+    <script src="~/assets/js/app.js"></script>
+
+}
