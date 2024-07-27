@@ -16,14 +16,10 @@
 
     <div class="col-md-6">
         <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
-
             <div>
                 <a href="#" class="btn btn-light"><i class="bx bx-plus me-1"></i> Yeni Kişi Ekle</a>
             </div>
-
-
         </div>
-
     </div>
 </div>
 
@@ -117,7 +113,7 @@
                 var tel = row.find('input').eq(3).val();
 
                 $.ajax({
-                    url: '@Url.Action("UpdateEmployee", "AdminDashboard")',
+                    url: '@Url.Action("UpdateEmployee", "Admin")',
                     type: 'POST',
                     data: {
                         id: id,
@@ -136,7 +132,7 @@
                         }
                     },
                     error: function () {
-                        alert('Error updating employee');
+                        alert('Çalışan güncellenirken bir hata oluştu.');
                     }
                 });
             });
