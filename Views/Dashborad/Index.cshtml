@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Rehber";
-    ViewBag.pTitle = "Rehber";
+    ViewBag.pTitle = "Ana Sayfa";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -17,24 +17,7 @@
 }
 
 
-<div class="row align-items-center">
-    <div class="col-md-6">
-        
-    </div>
 
-    <div class="col-md-6">
-        <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
-            
-            <div>
-                <a href="#" class="btn btn-light"><i class="bx bx-plus me-1"></i> Yeni Kişi Ekle</a>
-            </div>
-
-           
-        </div>
-
-    </div>
-</div>
-<!-- end row -->
 
 <div class="table-responsive mb-4">
     <table class="table align-middle datatable dt-responsive table-check nowrap" style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
@@ -44,7 +27,7 @@
                 <th scope="col">Departman</th>
                 <th scope="col">E-Posta</th>
                 <th scope="col">Telefon</th>
-                <th scope="col">İşlemler</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -57,18 +40,7 @@
                     <td>@employee.Departman</td>
                     <td>@employee.Email</td>
                     <td>@employee.Tel</td>
-                    <td>
-                        <div class="dropdown">
-                            <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bx bx-dots-horizontal-rounded"></i>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </div>
-                    </td>
+                    
                 </tr>
             }
         </tbody>
