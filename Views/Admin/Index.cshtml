@@ -64,6 +64,7 @@
                                 <th>Telefon</th>
                                 <th>Düzenle</th>
                                 <th>Kaydet</th>
+                                <th>Sil</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -91,6 +92,11 @@
                                     <td style="width: 70px">
                                         <a class="btn btn-outline-secondary btn-sm save" title="Save">
                                             <i class="fas fa-save"></i>
+                                        </a>
+                                    </td>
+                                    <td style="width: 70px">
+                                        <a class="btn btn-outline-danger btn-sm delete" title="Delete">
+                                            <i class="fas fa-trash-alt"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -143,7 +149,7 @@
                         if (response.success) {
                             alert(response.message);
                             window.location.reload();
-                            
+
                         } else {
                             alert(response.message);
                         }
@@ -189,7 +195,7 @@
                         if (response.success) {
                             alert(response.message);
                             row.find('input').prop('readonly', true);
-                            row.find('input').css('background-color', '#f8f9fa'); // Save işleminden sonra arka planı #f8f9fa yap
+                            row.find('input').css('background-color', '#f8f9fa');
                         } else {
                             alert(response.message);
                         }
@@ -198,6 +204,32 @@
                         alert('Çalışan güncellenirken bir hata oluştu.');
                     }
                 });
+            });
+
+            $('.delete').on('click', function () {
+                var row = $(this).closest('tr');
+                var id = row.data('id');
+
+                if (confirm('Bu çalışanı silmek istediğinizden emin misiniz?')) {
+                    $.ajax({
+                        url: '@Url.Action("DeleteEmployee", "Admin")',
+                        type: 'POST',
+                        data: {
+                            id: id
+                        },
+                        success: function (response) {
+                            if (response.success) {
+                                alert(response.message);
+                                row.remove();
+                            } else {
+                                alert(response.message);
+                            }
+                        },
+                        error: function () {
+                            alert('Çalışan silinirken bir hata oluştu.');
+                        }
+                    });
+                }
             });
         });
     </script>

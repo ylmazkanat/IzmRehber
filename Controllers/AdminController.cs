@@ -21,7 +21,7 @@ namespace IzmRehber.Controllers
             return View(employees);
         }
 
-        
+
 
         [HttpPost]
         public async Task<IActionResult> UpdateEmployee(int id, string adSoyad, string departman, string email, string tel)
@@ -71,6 +71,29 @@ namespace IzmRehber.Controllers
             catch (DbUpdateException ex)
             {
                 return Json(new { success = false, message = "Veritabanına ekleme sırasında bir hata oluştu: " + ex.Message });
+            }
+        }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteEmployee(int id)
+        {
+            var employee = await _context.users.FindAsync(id);
+            if (employee == null)
+            {
+                return Json(new { success = false, message = "Çalışan bulunamadı." });
+            }
+
+            try
+            {
+                _context.users.Remove(employee);
+                await _context.SaveChangesAsync();
+                return Json(new { success = true, message = "Çalışan başarıyla silindi." });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Çalışan silinirken bir hata oluştu: " + ex.Message });
             }
         }
     }
