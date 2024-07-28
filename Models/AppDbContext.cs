@@ -11,6 +11,8 @@ namespace IzmRehber.Models
         }
 
         public DbSet<Rehber> users { get; set; }
-       
+
+
+
     }
 }

@@ -1,0 +1,80 @@
+﻿@model IzmRehber.Models.Rehber
+
+@{
+    ViewBag.Title = "Profilim";
+    ViewBag.pTitle = "Ana Sayfa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm order-2 order-sm-1">
+                        <div class="d-flex align-items-start mt-3 mt-sm-0">
+                            <div class="flex-shrink-0">
+                                <div class="avatar-xl me-3">
+                                    <img src="~/assets/images/users/user.png" alt="" class="img-fluid rounded-circle d-block">
+                                </div>
+                            </div>
+                            <div class="flex-grow-1">
+                                <div>
+                                    <h5 class="font-size-50 mb-1">@Model.AdSoyad</h5>
+                                    <p class="text-muted font-size-13">@Model.Departman</p>
+                                    <p class="text-muted font-size-13">@Model.Email</p>
+                                    <p class="text-muted font-size-13">@Model.Tel</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-auto order-1 order-sm-2">
+                        <div class="d-flex align-items-start justify-content-end gap-2">
+                            <div>
+                                <a href="/" class="btn btn-light">
+                                    <i class="bx bx-home me-1"></i> Ana Sayfa
+                                </a>
+                            </div>
+                            <div>
+                                <a href="javascript:void(0);" class="btn btn-light">
+                                    <i class="bx bx-edit me-1"></i> Düzenle
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <hr class="mt-4 mb-4">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <h5 class="font-size-14">Kullanıcı Adı :</h5>
+                            <p class="text-muted">@Model.KullaniciAdi</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <h5 class="font-size-14">Departman :</h5>
+                            <p class="text-muted">@Model.Departman</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <h5 class="font-size-14">Email :</h5>
+                            <p class="text-muted">@Model.Email</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <h5 class="font-size-14">Telefon :</h5>
+                            <p class="text-muted">@Model.Tel</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
