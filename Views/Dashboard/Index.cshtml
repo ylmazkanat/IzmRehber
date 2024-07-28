@@ -1,23 +1,17 @@
-﻿
+﻿@model IEnumerable<IzmRehber.Models.Rehber>
+
 @{
     ViewBag.Title = "Rehber";
     ViewBag.pTitle = "Ana Sayfa";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-@section styles{
-
+@section styles {
     <!-- DataTables -->
     <link href="~/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-
     <!-- Responsive datatable examples -->
     <link href="~/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-
 }
-
-
-
 
 <div class="table-responsive mb-4">
     <table class="table align-middle datatable dt-responsive table-check nowrap" style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
@@ -27,7 +21,6 @@
                 <th scope="col">Departman</th>
                 <th scope="col">E-Posta</th>
                 <th scope="col">Telefon</th>
-                
             </tr>
         </thead>
         <tbody>
@@ -40,7 +33,6 @@
                     <td>@employee.Departman</td>
                     <td>@employee.Email</td>
                     <td>@employee.Tel</td>
-                    
                 </tr>
             }
         </tbody>
@@ -48,21 +40,14 @@
     <!-- end table -->
 </div>
 <!-- end table responsive -->
-
-
-@section scripts{
-
+@section scripts {
     <!-- Required datatable js -->
     <script src="~/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="~/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-
     <!-- Responsive examples -->
     <script src="~/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="~/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-
     <!-- init js -->
     <script src="~/assets/js/pages/datatable-pages.init.js"></script>
-
     <script src="~/assets/js/app.js"></script>
-
 }
