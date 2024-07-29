@@ -1,14 +1,15 @@
-﻿<!-- ========== Left Sidebar Start ========== -->
+﻿@{
+    var userRole = ViewBag.UserRole as int?;
+}
+
+<!-- ========== Left Sidebar Start ========== -->
 <div class="vertical-menu">
-
     <div data-simplebar class="h-100">
-
         <!--- Sidemenu -->
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
                 <li class="menu-title" data-key="t-menu">Menü</li>
-
                 <li>
                     <a href="/">
                         <i data-feather="home"></i>
@@ -17,51 +18,34 @@
                 </li>
                 <li>
                     <a href="/auth/profile">
-                        <i data-feather="home"></i>
-                        <span >Profilim</span>
+                        <i data-feather="user"></i>
+                        <span>Profilim</span>
                     </a>
                 </li>
 
-               
-               
-                
-
-                <li class="menu-title mt-2" data-key="t-components">Admin Menü</li>
-
-                <li>
-                    <a href="/Admin">
-                        <i data-feather="home"></i>
-                        <span data-key="t-dashboard">Rehberi Düzenle</span>
-                    </a>
-                </li>
-               
-
-                <li>
-                    <a href="javascript: void(0);">
-                        <i data-feather="box"></i>
-                        <span class="badge rounded-pill badge-soft-danger  text-danger float-end">7</span>
-                        <span data-key="t-forms">Forms</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="/form/elements" data-key="t-form-elements">Basic Elements</a></li>
-                        <li><a href="/form/validation" data-key="t-form-validation">Validation</a></li>
-                        <li><a href="/form/advanced" data-key="t-form-advanced">Advanced Plugins</a></li>
-                        <li><a href="/form/editors" data-key="t-form-editors">Editors</a></li>
-                        <li><a href="/form/uploads" data-key="t-form-upload">File Upload</a></li>
-                        <li><a href="/form/wizard" data-key="t-form-wizard">Wizard</a></li>
-                        <li><a href="/form/mask" data-key="t-form-mask">Mask</a></li>
-                    </ul>
-                </li>
-
-              
-
-               
+                <!-- Admin Menü -->
+                @if (userRole == 1)
+                {
+                    <li class="menu-title mt-2" data-key="t-components">Admin Menü</li>
+                    <li>
+                        <a href="/Admin">
+                            <i data-feather="settings"></i>
+                            <span data-key="t-dashboard">Rehberi Düzenle</span>
+                        </a>
+                    </li>
+                }
+                <!-- Admin Menü Sonu -->
 
             </ul>
-
-            
         </div>
         <!-- Sidebar -->
     </div>
 </div>
 <!-- Left Sidebar End -->
+@section scripts {
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        // Feather ikonları başlat
+        feather.replace();
+    </script>
+}
