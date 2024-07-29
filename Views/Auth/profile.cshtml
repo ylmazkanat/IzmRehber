@@ -154,4 +154,86 @@
     <!-- init js -->
     <script src="~/assets/js/pages/datatable-pages.init.js"></script>
     <script src="~/assets/js/app.js"></script>
+
+
+
+    <script>
+        $(document).ready(function () {
+            var table = $('#datatable').DataTable({
+                lengthChange: true,
+                pageLength: 10,
+                responsive: true
+            });
+
+            
+
+            $('.edit').on('click', function () {
+                var row = $(this).closest('tr');
+                var inputs = row.find('input');
+                if (inputs.prop('readonly')) {
+                    inputs.prop('readonly', false);
+                    inputs.css('background-color', '#f07575');
+                } else {
+                    inputs.prop('readonly', true);
+                    inputs.css('background-color', '#f8f9fa');
+                }
+            });
+
+            $('.save').on('click', function () {
+                var row = $(this).closest('tr');
+                var id = row.data('id');
+                var adSoyad = row.find('input').eq(0).val();
+                var departman = row.find('input').eq(1).val();
+                var tel = row.find('input').eq(2).val();
+                var email = row.find('input').eq(3).val();
+
+                var kullaniciAdi = row.find('input').eq(4).val();
+                var sifre = row.find('input').eq(5).val();
+
+                $.ajax({
+                    url: '@Url.Action("UpdateEmployee", "Admin")',
+                    type: 'POST',
+                    data: {
+                        id: id,
+                        kullaniciAdi: kullaniciAdi,
+                        sifre: sifre,
+                        adSoyad: adSoyad,
+                        departman: departman,
+                        email: email,
+                        tel: tel,
+                        role: row.find('input[name="Role"]').val()  // Role bilgisini de gönder
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            alert(response.message);
+                            row.find('input').prop('readonly', true);
+                            row.find('input').css('background-color', '#f8f9fa');
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function () {
+                        alert('Çalışan güncellenirken bir hata oluştu.');
+                    }
+                });
+            });
+
+            
+           
+            // Toggle password visibility
+            $(document).on('click', '.toggle-password', function () {
+                var input = $(this).closest('.input-group').find('.sifre');
+                var icon = $(this).find('i');
+                if (input.attr('type') === 'password') {
+                    input.attr('type', 'text');
+                    icon.removeClass('fa-eye').addClass('fa-eye-slash');
+                } else {
+                    input.attr('type', 'password');
+                    icon.removeClass('fa-eye-slash').addClass('fa-eye');
+                }
+            });
+        });
+
+    </script>
+}
 }

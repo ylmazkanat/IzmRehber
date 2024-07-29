@@ -27,11 +27,14 @@ namespace IzmRehber.Controllers
             if (user != null)
             {
                 HttpContext.Session.SetInt32("UserId", user.Id);
+                
+                HttpContext.Session.SetInt32("UserRole", user.Role);
                 return RedirectToAction("Profile");
             }
-
-            ViewBag.ErrorMessage = "Giris Bilgileri Hatali Tekrar Deneyiniz.";
-            return View();
+            
+            TempData["ErrorMessage"] = "Giriş Bilgileriniz Hatalı. Tekrar Deneyiniz.";
+            return Redirect("/auth/login");
+            
         }
 
         [HttpGet]
@@ -48,7 +51,9 @@ namespace IzmRehber.Controllers
             {
                 return NotFound();
             }
-
+            // Kullanıcı rolünü ViewBag ile geçirme
+            ViewBag.UserRole = user.Role;
+            ViewBag.UserName = user.AdSoyad;
             return View(user);
         }
 

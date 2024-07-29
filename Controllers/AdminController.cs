@@ -17,6 +17,29 @@ namespace IzmRehber.Controllers
         // GET: Dashboard
         public async Task<IActionResult> IndexAsync()
         {
+           
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+            {
+                return Redirect("/auth/login");
+            }
+
+            var user = _context.users.FirstOrDefault(u => u.Id == userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            // Kullanıcı rolünü ViewBag ile geçirme
+            ViewBag.UserRole = user.Role;
+            ViewBag.UserName = user.AdSoyad;
+            // Eğer kullanıcı rolü admin değilse, uyarı ver ve giriş sayfasına yönlendir
+            if (user.Role != 1) // admin rolü 1 olarak kabul ediliyor
+            {
+                TempData["ErrorMessage"] = "Bu sayfaya Yetkiniz Yoktur. Lütfen Yetkili bir hesaptan giriş Yapınız.";
+                return Redirect("/auth/login");
+            }
+
+            // Admin kullanıcılar için tüm çalışanları listele
             var employees = await _context.users.ToListAsync();
             return View(employees);
         }

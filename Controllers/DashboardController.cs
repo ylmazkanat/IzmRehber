@@ -18,11 +18,21 @@ namespace IzmRehber.Controllers
         public async Task<IActionResult> Index()
         {
             // Oturum kontrolü
-            if (HttpContext.Session.GetInt32("UserId") == null)
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
             {
                 return RedirectToAction("Login", "Auth");
             }
 
+            var user = await _context.users.FirstOrDefaultAsync(u => u.Id == userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            // Kullanıcı rolünü ViewBag ile geçirme
+            ViewBag.UserRole = user.Role;
+            ViewBag.UserName = user.AdSoyad;
             var employees = await _context.users.ToListAsync();
             return View(employees);
         }

@@ -9,6 +9,8 @@
     <link href="~/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <!-- Responsive datatable examples -->
     <link href="~/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+
 }
 <div class="card">
     <div class="card-body">
@@ -43,6 +45,8 @@
                     <div class="col-sm-12">
                         <center> <button type="submit" class="btn btn-light">Yeni Kişi Ekle</button></center>
                     </div>
+                    <!-- Gizli role alanı -->
+                    <input type="hidden" id="role" name="Role" value="0">
                 </form>
             </div>
         </div>
@@ -135,6 +139,9 @@
     <script src="~/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="~/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 
+    <!-- init js -->
+    <script src="~/assets/js/pages/datatable-pages.init.js"></script>
+    <script src="~/assets/js/app.js"></script>
     <script>
         $(document).ready(function () {
             var table = $('#datatable').DataTable({
@@ -152,6 +159,7 @@
                 var departman = $('#departman').val();
                 var email = $('#email').val();
                 var tel = $('#tel').val();
+                var role = $('#role').val();  // Role bilgisini al
 
                 $.ajax({
                     url: '@Url.Action("CreateEmployee", "Admin")',
@@ -162,7 +170,8 @@
                         adSoyad: adSoyad,
                         departman: departman,
                         email: email,
-                        tel: tel
+                        tel: tel,
+                        role: role  // Role bilgisini gönder
                     },
                     success: function (response) {
                         if (response.success) {
@@ -193,12 +202,13 @@
             $('.save').on('click', function () {
                 var row = $(this).closest('tr');
                 var id = row.data('id');
-                var kullaniciAdi = row.find('input').eq(0).val();
-                var sifre = row.find('input').eq(1).val();
-                var adSoyad = row.find('input').eq(2).val();
-                var departman = row.find('input').eq(3).val();
-                var email = row.find('input').eq(4).val();
-                var tel = row.find('input').eq(5).val();
+                var adSoyad = row.find('input').eq(0).val();
+                var departman = row.find('input').eq(1).val();
+                var tel = row.find('input').eq(2).val();
+                var email = row.find('input').eq(3).val();
+                
+                var kullaniciAdi = row.find('input').eq(4).val();
+                var sifre = row.find('input').eq(5).val();
 
                 $.ajax({
                     url: '@Url.Action("UpdateEmployee", "Admin")',
@@ -210,7 +220,8 @@
                         adSoyad: adSoyad,
                         departman: departman,
                         email: email,
-                        tel: tel
+                        tel: tel,
+                        role: row.find('input[name="Role"]').val()  // Role bilgisini de gönder
                     },
                     success: function (response) {
                         if (response.success) {
@@ -266,6 +277,7 @@
                 }
             });
         });
+     
     </script>
 }
 
