@@ -2,6 +2,7 @@
 using IzmRehber.Models;
 using Microsoft.AspNetCore.Http;
 using System.Linq;
+using System.Security.Principal;
 
 namespace IzmRehber.Controllers
 {
@@ -27,14 +28,30 @@ namespace IzmRehber.Controllers
             if (user != null)
             {
                 HttpContext.Session.SetInt32("UserId", user.Id);
-                
                 HttpContext.Session.SetInt32("UserRole", user.Role);
                 return RedirectToAction("Profile");
             }
-            
+
             TempData["ErrorMessage"] = "Giriş Bilgileriniz Hatalı. Tekrar Deneyiniz.";
-            return Redirect("/auth/login");
-            
+            return RedirectToAction("Login");
+        }
+
+        [HttpPost]
+        public IActionResult WindowsLogin()
+        {
+            var windowsUsername = WindowsIdentity.GetCurrent().Name;
+            var user = _context.users.FirstOrDefault(u => u.KullaniciAdi == windowsUsername);
+
+            if (user != null)
+            {
+                HttpContext.Session.SetInt32("UserId", user.Id);
+                HttpContext.Session.SetInt32("UserRole", user.Role);
+                TempData["SuccessMessage"] = $"Başarıyla giriş yaptınız. Windows Kullanıcı Adınız: {windowsUsername}";
+                return RedirectToAction("Profile");
+            }
+
+            TempData["ErrorMessage"] = $"Windows ile giriş yaparken bir hata oluştu. Kullanıcı bulunamadı. Kullanıcı Adınız: {windowsUsername}";
+            return RedirectToAction("Login");
         }
 
         [HttpGet]
@@ -51,7 +68,6 @@ namespace IzmRehber.Controllers
             {
                 return NotFound();
             }
-            // Kullanıcı rolünü ViewBag ile geçirme
             ViewBag.UserRole = user.Role;
             ViewBag.UserName = user.AdSoyad;
             return View(user);
