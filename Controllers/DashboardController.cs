@@ -36,5 +36,17 @@ namespace IzmRehber.Controllers
             var employees = await _context.users.ToListAsync();
             return View(employees);
         }
+
+        public IActionResult maintenance()
+        {
+
+            return View();
+        }
+
+        public IActionResult Error404()
+        {
+
+            return View();
+        }
     }
 }
