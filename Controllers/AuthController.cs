@@ -24,7 +24,7 @@ namespace IzmRehber.Controllers
         [HttpPost]
         public IActionResult Login(string Username, string Password)
         {
-            var user = _context.users.FirstOrDefault(u => u.KullaniciAdi == Username && u.Sifre == Password);
+            var user = _context.users.FirstOrDefault(u => (u.KullaniciAdi == Username || u.Email == Username) && u.Sifre == Password);
             if (user != null)
             {
                 HttpContext.Session.SetInt32("UserId", user.Id);
