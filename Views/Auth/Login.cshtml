@@ -19,11 +19,8 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         max-width: 400px;
         width: 100%;
-        min-height: 80vh !important; 
-   
+        min-height: 80vh !important;
     }
-
-    
 
     .form-floating .form-control {
         background: rgba(255, 255, 255, 0.8);
@@ -51,7 +48,10 @@
         color: #6c757d;
     }
 </style>
-
+<head>
+    <meta charset="UTF-8">
+    
+</head>
 <div class="auth-page">
     <div class="auth-full-page-content d-flex flex-column p-sm-5 p-4">
         <div class="text-center mb-4">
@@ -69,6 +69,7 @@
                 <div class="p-2 mt-4">
                     <h4>Giriş Yap</h4>
                     <br />
+
                     <form method="post" action="@Url.Action("Login", "Auth")">
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="Username">
@@ -97,4 +98,11 @@
 @section scripts {
     <!-- password addon init -->
     <script src="~/assets/js/pages/pass-addon.init.js"></script>
+
+    @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+    {
+        <script>
+            alert('@ViewBag.ErrorMessage');
+        </script>
+    }
 }

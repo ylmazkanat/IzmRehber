@@ -30,7 +30,7 @@ namespace IzmRehber.Controllers
                 return RedirectToAction("Profile");
             }
 
-            ViewBag.ErrorMessage = "Kullanıcı adı veya şifre yanlış.";
+            ViewBag.ErrorMessage = "Giris Bilgileri Hatali Tekrar Deneyiniz.";
             return View();
         }
 
