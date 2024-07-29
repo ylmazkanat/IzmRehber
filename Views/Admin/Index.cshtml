@@ -142,7 +142,14 @@
     <!-- init js -->
     <script src="~/assets/js/pages/datatable-pages.init.js"></script>
     <script src="~/assets/js/app.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
     <script>
+        // Feather ikonları başlat
+        feather.replace();
+    </script>
+    <script>
+
+        
         $(document).ready(function () {
             var table = $('#datatable').DataTable({
                 lengthChange: true,
