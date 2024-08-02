@@ -6,14 +6,16 @@
 <style>
     .auth-page {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         height: 100vh;
-        background-color: #b21d12; /* Arka plan rengi */
+        background-color: #b21d12; /* Background color */
+        padding: 0 50px; /* Adjust padding for spacing */
+        position: relative;
     }
 
-    .auth-full-page-content {
-        background-color: white; /* Login kısmı beyaz arka plan */
+    .auth-full-page-content, .cv-full-page-content {
+        background-color: white; /* White background */
         border-radius: 10px;
         padding: 30px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -36,38 +38,57 @@
             border-color: #9e190f;
         }
 
-    .auth-logo img {
-        height: 50px;
+    .auth-logo img, .cv-profile-pic img {
+        height: 75px;
     }
 
-    .auth-content h4 {
+    .auth-content h4, .cv-content h4 {
         color: #b21d12;
     }
 
-    .auth-content p {
+    .auth-content p, .cv-content p {
         color: #6c757d;
     }
+
+    .cv-profile-pic {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+        .cv-profile-pic img {
+            border-radius: 50%;
+            height: 100px;
+            width: 100px;
+        }
+
+    a {
+        color: #b21d12;
+    }
+
+    .center-logo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+        .center-logo img {
+            width: 170px;
+        }
+
 </style>
-<head>
-    <meta charset="UTF-8">
-    
-</head>
+
 <div class="auth-page">
     <div class="auth-full-page-content d-flex flex-column p-sm-5 p-4">
         <div class="text-center mb-4">
             <a href="/" class="d-block auth-logo">
-                <img src="~/assets/images/logo.png" alt=""> <span class="logo-txt"></span>
+                <img src="~/assets/images/logo.png" alt="">
+                <span class="logo-txt"></span>
             </a>
         </div>
         <div class="auth-content my-auto">
             <div class="text-center">
-                <div class="avatar-lg mx-auto">
-                    <div class="avatar-title rounded-circle bg-light">
-                        <i class="bx bx-user-circle h2 mb-0 text-danger"></i>
-                    </div>
-                </div>
                 <div class="p-2 mt-4">
-                    <h4>Giriş Yap</h4>
                     <br />
                     @if (TempData["ErrorMessage"] != null)
                     {
@@ -87,10 +108,9 @@
                         <div class="mt-3 d-grid">
                             <button class="btn btn-primary btn-block" type="submit">Giriş Yap</button>
                         </div>
-                        
                     </form>
                     <div class="mt-3 d-grid">
-                        <form id="windowsLoginForm"  method="post" action="@Url.Action("WindowsLogin", "Auth")">
+                        <form id="windowsLoginForm" method="post" action="@Url.Action("WindowsLogin", "Auth")">
                             <button class="btn btn-secondary btn-block" type="submit">Windows ile Giriş Yap</button>
                         </form>
                     </div>
@@ -99,22 +119,32 @@
         </div>
         <div class="mt-4 mt-md-5 text-center">
             <p class="mb-0">
-                ©
-                <script>document.write(new Date().getFullYear())</script> Yılmaz. Crafted with <i class="mdi mdi-heart text-danger"></i> by Yılmaz KANAT
+                Copyright ©
+                <script>document.write(new Date().getFullYear())</script> Tüm hakları saklıdır.<br /> <a href="https://yilmazkanat.com" target="_blank">Yılmaz KANAT</a> tarafından yapılmıştır.
             </p>
+        </div>
+    </div>
+    <div class="center-logo">
+        <img src="~/assets/images/CSB_beyaz_logo.png" alt="Center Logo">
+    </div>
+    <div class="cv-full-page-content d-flex flex-column p-sm-6 p-3">
+        <div class="cv-content my-auto">
+            <div class="text-center">
+                <div class="cv-profile-pic">
+                    <img src="~/assets/images/users/user.png" alt="Yılmaz KANAT">
+                </div>
+                <h2>Yılmaz KANAT</h2>
+
+                <h6>Website :<a href="https://yilmazkanat.com" target="_blank"> Yilmazkanat.com</a></h6>
+                <h6>Linkedin :<a href="https://www.linkedin.com/in/yilmaz-kanat/" target="_blank"> Yılmaz KANAT</a></h6>
+                <h6>E-Posta Adresim :<a href="mailto:yilmazkanatceng@gmail.com"> yilmazkanatceng@gmail.com</a></h6>
+                <p>T.C. Çevre, Şehircilik ve İklim Değişikliği Bakanlığı adına staj dönemimde gerçekleştirdiğim bu proje, çalışanlara daha kullanışlı bir arayüz sunarak işlerini kolaylaştırmayı amaçlamaktadır. Proje sürecinde, kullanıcı deneyimini ön planda tutarak, iş verimliliğini artıran çözümler geliştirdim.</p>
+
+            </div>
         </div>
     </div>
 </div>
 
 @section scripts {
-    <!-- password addon init -->
     <script src="~/assets/js/pages/pass-addon.init.js"></script>
-
-    <script>
-        window.onload = function () {
-            if (confirm("Windows oturumunuz ile giriş yapmak ister misiniz?")) {
-                document.getElementById('windowsLoginForm').submit();
-            }
-        };
-    </script>
 }

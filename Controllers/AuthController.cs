@@ -40,17 +40,18 @@ namespace IzmRehber.Controllers
         public IActionResult WindowsLogin()
         {
             var windowsUsername = WindowsIdentity.GetCurrent().Name;
-            var user = _context.users.FirstOrDefault(u => u.KullaniciAdi == windowsUsername);
+            var extractedUsername = windowsUsername.Split('\\').Last();
+            var user = _context.users.FirstOrDefault(u => u.KullaniciAdi == extractedUsername);
 
             if (user != null)
             {
                 HttpContext.Session.SetInt32("UserId", user.Id);
                 HttpContext.Session.SetInt32("UserRole", user.Role);
-                TempData["SuccessMessage"] = $"Başarıyla giriş yaptınız. Windows Kullanıcı Adınız: {windowsUsername}";
+                TempData["SuccessMessage"] = $"Başarıyla giriş yaptınız. Windows Kullanıcı Adınız: {extractedUsername}";
                 return RedirectToAction("Profile");
             }
 
-            TempData["ErrorMessage"] = $"Windows ile giriş yaparken bir hata oluştu. Kullanıcı bulunamadı. Kullanıcı Adınız: {windowsUsername}";
+            TempData["ErrorMessage"] = $"Windows ile giriş yaparken bir hata oluştu. Kullanıcı bulunamadı. Kullanıcı Adınız: {extractedUsername}";
             return RedirectToAction("Login");
         }
 
