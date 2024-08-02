@@ -55,17 +55,11 @@
                     </form>
                 </div>
             </div>
-            
-            <div class="dropdown d-none d-sm-inline-block">
-                <button type="button" class="btn header-item" id="mode-setting-btn">
-                    <i data-feather="moon" class="icon-lg layout-mode-dark"></i>
-                    <i data-feather="sun" class="icon-lg layout-mode-light"></i>
-                </button>
-            </div>
 
-           
 
-           
+
+
+
 
 
             <div class="dropdown d-inline-block">
@@ -73,18 +67,24 @@
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="rounded-circle header-profile-user" src="~/assets/images/users/user.png"
                          alt="Header Avatar">
-                    <span class="d-none d-xl-inline-block ms-1 fw-medium">@ViewBag.UserName</span>
+                    <span class="d-none d-xl-inline-block ms-1 fw-medium">@Html.Raw(ViewBag.UserName)</span>
                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
-                    <!-- item-->
-                    <a class="dropdown-item" href="/auth/profile"><i class="mdi mdi mdi-face-man font-size-16 align-middle me-1"></i>   Profilim</a>
-                    
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/auth/logout"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Çıkış Yap</a>
+                    @if (ViewBag.UserName.Contains("Giriş Yap"))
+                    {
+                        <!-- Display Giriş Yap button if user is not logged in -->
+                        <a class="dropdown-item" href="/Auth/Login"><i class="mdi mdi-login font-size-16 align-middle me-1"></i> Giriş Yap</a>
+                    }
+                    else
+                    {
+                        <!-- Display profile and logout options if user is logged in -->
+                        <a class="dropdown-item" href="/auth/profile"><i class="mdi mdi-face-man font-size-16 align-middle me-1"></i> Profilim</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/auth/logout"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Çıkış Yap</a>
+                    }
                 </div>
             </div>
 
-        </div>
     </div>
 </header>
