@@ -19,33 +19,37 @@ namespace IzmRehber.Controllers
         {
             // Oturum kontrolü
             var userId = HttpContext.Session.GetInt32("UserId");
-            if (userId == null)
-            {
-                return RedirectToAction("Login", "Auth");
-            }
 
-            var user = await _context.users.FirstOrDefaultAsync(u => u.Id == userId);
-            if (user == null)
+            // Varsayılan değerleri ayarlama
+            var userRole = 0;
+            var userName = "Giriş Yap";
+
+            // Kullanıcı oturum açmışsa
+            if (userId != null)
             {
-                return NotFound();
+                var user = await _context.users.FirstOrDefaultAsync(u => u.Id == userId);
+                if (user != null)
+                {
+                    userRole = user.Role;
+                    userName = user.AdSoyad;
+                }
             }
 
             // Kullanıcı rolünü ViewBag ile geçirme
-            ViewBag.UserRole = user.Role;
-            ViewBag.UserName = user.AdSoyad;
+            ViewBag.UserRole = userRole;
+            ViewBag.UserName = userName;
+
             var employees = await _context.users.ToListAsync();
             return View(employees);
         }
 
-        public IActionResult maintenance()
+        public IActionResult Maintenance()
         {
-
             return View();
         }
 
         public IActionResult Error404()
         {
-
             return View();
         }
     }
