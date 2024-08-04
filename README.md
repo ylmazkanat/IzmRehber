@@ -29,6 +29,8 @@ Sistemin üç farklı arayüzü vardır.<br>
 <br><br>
 Diğer projelerimi incelemek ve benimle iletişime geçmek için <a href="https://yilmazkanat.com" target="_blank">Tıklayın. (yilmazkanat.com)</a>
 <br>
-<h3>Uygulama Görselleri:</h3><br>
-
-
+<h3>Uygulama Görselleri:</h3><br><br>
+ <img src="https://github.com/ylmazkanat/IzmRehber/blob/master/Uygulama%20Aray%C3%BCz%C3%BC/login.png" alt="Login Ekranı" width="100%" ><br>
+ <img src="https://github.com/ylmazkanat/IzmRehber/blob/master/Uygulama%20Aray%C3%BCz%C3%BC/profil.png" alt="Profil Ekranı" width="100%" ><br>
+ <img src="https://github.com/ylmazkanat/IzmRehber/blob/master/Uygulama%20Aray%C3%BCz%C3%BC/rehber.png" alt="Rehber Sayfası" width="100%" ><br>
+ <img src="https://github.com/ylmazkanat/IzmRehber/blob/master/Uygulama%20Aray%C3%BCz%C3%BC/rehberi-duzenle.png" alt="Rehberi Düzenleme Sayfası" width="100%" ><br>
