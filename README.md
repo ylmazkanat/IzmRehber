@@ -28,3 +28,7 @@ Sistemin üç farklı arayüzü vardır.<br>
 • Uygulamayı artık kullanabilirsiniz.<br>
 <br><br>
 Diğer projelerimi incelemek ve benimle iletişime geçmek için <a href="https://yilmazkanat.com" target="_blank">Tıklayın. (yilmazkanat.com)</a>
+<br>
+<h3>Uygulama Görselleri:</h3><br>
+
+
