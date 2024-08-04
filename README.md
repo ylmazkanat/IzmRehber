@@ -26,5 +26,5 @@ Sistemin üç farklı arayüzü vardır.<br>
 • Update-Database komutunu kullanarak veritabanındaki tabloyu oluşturun.<br>
 • Giriş işlemi için ssms açın ve users tablosuna bir kullanıcı ekleyin. (Role 1 = Admin, Role 0 = Personel)<br>
 • Uygulamayı artık kullanabilirsiniz.<br>
-
-Benimle iletişime geçmek için <a href="https://yilmazkanat.com" target="_blank">Tıklayın. (yilmazkanat.com)</a>
+<br><br>
+Diğer projelerimi incelemek ve benimle iletişime geçmek için <a href="https://yilmazkanat.com" target="_blank">Tıklayın. (yilmazkanat.com)</a>
