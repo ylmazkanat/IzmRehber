@@ -1,4 +1,4 @@
-<h1> Kullanışlı Rehber Projesi</h1> <h4>(Asp.net Core MVC)</h4>
+<h1> Kullanışlı Rehber Projesi (Asp.net Core MVC)</h1>
 T.C. Çevre, Şehircilik ve İklim Değişikliği Bakanlığı adına staj dönemimde gerçekleştirdiğim bu proje, çalışanlara daha kullanışlı bir arayüz sunarak işlerini kolaylaştırmayı amaçlamaktadır. Proje sürecinde, kullanıcı deneyimini ön planda tutarak, iş verimliliğini artıran çözümler geliştirdim.<br>
 
 Sistemin üç farklı arayüzü vardır.<br>
