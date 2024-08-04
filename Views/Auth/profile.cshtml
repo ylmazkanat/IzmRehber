@@ -13,6 +13,14 @@
     <link href="~/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 }
 
+<style>
+    .disabled-input {
+        background-color: #f5f5f5; /* Light grey background */
+        cursor: not-allowed; /* Not-allowed cursor */
+        color: #6c757d; /* Optional: lighter text color */
+    }
+</style>
+
 <div class="row">
     <div class="col-xl-12 col-lg-12">
         <div class="card">
@@ -42,7 +50,7 @@
                                     <i class="bx bx-home me-1"></i> Ana Sayfa
                                 </a>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -82,68 +90,56 @@
                 <table id="datatable" class="table table-editable table-nowrap align-middle table-edits">
                     <thead>
                         <tr>
-                            
-
                             <th>Adı Soyadı</th>
                             <th>Departman</th>
                             <th>Telefon</th>
-                            <th>E-Posta</th>
-                            <th>Kullanıcı Adı</th>
                             <th>Şifre</th>
-
                             <th>Düzenle</th>
                             <th>Kaydet</th>
-                           
                         </tr>
                     </thead>
                     <tbody>
-                <tr data-id="@Model.Id">
-                    
-
-                    <td data-field="AdSoyad">
-                        <input type="text" class="form-control" value="@Model.AdSoyad" readonly />
-                    </td>
-                    <td data-field="Departman">
-                        <input type="text" class="form-control" value="@Model.Departman" readonly />
-                    </td>
-                    <td data-field="Tel">
-                        <input type="text" class="form-control" value="@Model.Tel" readonly />
-                    </td>
-                    <td data-field="Email">
-                        <input type="text" class="form-control" value="@Model.Email" readonly />
-                    </td>
-
-                    <td data-field="KullaniciAdi">
-                        <input type="text" class="form-control" value="@Model.KullaniciAdi" readonly />
-                    </td>
-                    <td data-field="Sifre" style="width: 130px">
-                        <div class="input-group">
-                            <input type="password" class="form-control sifre" style="width:50px" value="@Model.Sifre" readonly />
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary btn-sm toggle-password" type="button">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </td>
-                    <td style="width: 30px">
-                        <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                            <i class="fas fa-pencil-alt"></i>
-                        </a>
-                    </td>
-                    <td style="width: 30px">
-                        <a class="btn btn-outline-secondary btn-sm save" title="Save">
-                            <i class="fas fa-save"></i>
-                        </a>
-                    </td>
-                    
-                </tr>
+                        <tr data-id="@Model.Id">
+                            <td data-field="AdSoyad">
+                                <input type="text" class="form-control" value="@Model.AdSoyad" readonly />
+                            </td>
+                            <td data-field="Departman">
+                                <input type="text" class="form-control" value="@Model.Departman" readonly />
+                            </td>
+                            <td data-field="Tel">
+                                <input type="text" class="form-control" value="@Model.Tel" readonly />
+                            </td>
+                            <td data-field="Sifre" style="width: 130px">
+                                <div class="input-group">
+                                    <input type="password" class="form-control sifre" style="width:50px" value="@Model.Sifre" readonly />
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary btn-sm toggle-password" type="button">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="width: 30px">
+                                <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+                            </td>
+                            <td style="width: 30px">
+                                <a class="btn btn-outline-secondary btn-sm save" title="Save">
+                                    <i class="fas fa-save"></i>
+                                </a>
+                            </td>
+                            <input type="hidden" name="KullaniciAdi" value="@Model.KullaniciAdi" />
+                            <input type="hidden" name="Email" value="@Model.Email" />
+                            <input type="hidden" name="Role" value="@Model.Role" />
+                        </tr>
                     </tbody>
-                    </table>
+                </table>
             </div>
         </div>
     </div>
 </div>
+
 @section scripts {
     <script src="https://unpkg.com/feather-icons"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -157,23 +153,18 @@
     <!-- init js -->
     <script src="~/assets/js/pages/datatable-pages.init.js"></script>
     <script src="~/assets/js/app.js"></script>
-    
-
 
     <script>
         feather.replace();
         $(document).ready(function () {
             var table = $('#datatable').DataTable({
-                
                 lengthChange: false, // Length değiştirici gizleme
                 searching: false
             });
 
-            
-
             $('.edit').on('click', function () {
                 var row = $(this).closest('tr');
-                var inputs = row.find('input');
+                var inputs = row.find('input').not('.disabled-input'); // Exclude non-editable fields
                 if (inputs.prop('readonly')) {
                     inputs.prop('readonly', false);
                     inputs.css('background-color', '#f07575');
@@ -189,22 +180,21 @@
                 var adSoyad = row.find('input').eq(0).val();
                 var departman = row.find('input').eq(1).val();
                 var tel = row.find('input').eq(2).val();
-                var email = row.find('input').eq(3).val();
-
-                var kullaniciAdi = row.find('input').eq(4).val();
-                var sifre = row.find('input').eq(5).val();
+                var sifre = row.find('input').eq(3).val();
+                var kullaniciAdi = row.find('input[name="KullaniciAdi"]').val();
+                var email = row.find('input[name="Email"]').val();
 
                 $.ajax({
                     url: '@Url.Action("UpdateEmployee", "Admin")',
                     type: 'POST',
                     data: {
                         id: id,
-                        kullaniciAdi: kullaniciAdi,
                         sifre: sifre,
                         adSoyad: adSoyad,
                         departman: departman,
-                        email: email,
                         tel: tel,
+                        kullaniciAdi: kullaniciAdi,
+                        email: email,
                         role: row.find('input[name="Role"]').val()  // Role bilgisini de gönder
                     },
                     success: function (response) {
@@ -222,8 +212,6 @@
                 });
             });
 
-            
-           
             // Toggle password visibility
             $(document).on('click', '.toggle-password', function () {
                 var input = $(this).closest('.input-group').find('.sifre');
@@ -237,6 +225,5 @@
                 }
             });
         });
-
     </script>
 }
