@@ -2,7 +2,7 @@
 T.C. Çevre, Şehircilik ve İklim Değişikliği Bakanlığı adına staj dönemimde gerçekleştirdiğim bu proje, çalışanlara daha kullanışlı bir arayüz sunarak işlerini kolaylaştırmayı amaçlamaktadır. Proje sürecinde, kullanıcı deneyimini ön planda tutarak, iş verimliliğini artıran çözümler geliştirdim.
 
 Sistemin üç farklı arayüzü vardır.
-• Personel arayüzü
+• Personel arayüzü</br>
 • Admin arayüzü
 • Login arayüzü
 
